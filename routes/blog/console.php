@@ -6,6 +6,3 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
-
-// Include console commands from blog routes if needed
-require __DIR__.'/blog/console.php';

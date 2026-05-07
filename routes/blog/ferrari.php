@@ -12,7 +12,7 @@ Route::get('/car/{marka?}/{model?}/{kolor?}/{cena?}', function (?string $marka =
 
     foreach (['marka', 'model', 'kolor', 'cena'] as $field) {
         $value = $$field;
-        if ($value !== null && !preg_match($rules[$field], $value)) {
+        if ($value !== null && ! preg_match($rules[$field], $value)) {
             return response("Nieprawidłowy format parametru {$field}.", 400);
         }
     }
@@ -39,13 +39,13 @@ Route::get('/auto/{marka?}/{model?}/{kolor?}/{cena?}', function (?string $marka 
 
     foreach (['marka', 'model', 'kolor', 'cena'] as $field) {
         $value = $$field;
-        if ($value !== null && !preg_match($rules[$field], $value)) {
+        if ($value !== null && ! preg_match($rules[$field], $value)) {
             return response("Nieprawidłowy format parametru {$field}.", 400);
         }
     }
 
     $segments = array_filter([$marka, $model, $kolor, $cena], fn ($value) => $value !== null);
-    $path = '/car' . ($segments ? '/' . implode('/', $segments) : '');
+    $path = '/car'.($segments ? '/'.implode('/', $segments) : '');
 
     return redirect($path);
 });
