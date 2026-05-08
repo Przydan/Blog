@@ -16,14 +16,22 @@
                         {{ $service['description'] }}
                     </p>
                     <ul class="text-left space-y-2 mb-8 max-w-xs mx-auto">
-                        @foreach($service['details'] as $detail)
-                            <li class="flex items-center gap-2 text-sm text-gray-600">
-                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                {{ $detail }}
-                            </li>
-                        @endforeach
+                        @php
+                            $details = $service['details'];
+                            if (is_string($details)) {
+                                $details = array_map('trim', explode(',', $details));
+                            }
+                        @endphp
+                        @if(is_iterable($details))
+                            @foreach($details as $detail)
+                                <li class="flex items-center gap-2 text-sm text-gray-600">
+                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    {{ $detail }}
+                                </li>
+                            @endforeach
+                        @endif
                     </ul>
                     <a href="#" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition font-medium">
                         Get a Quote

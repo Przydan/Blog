@@ -6,33 +6,35 @@
         </a>
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($services as $service)
+<div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
                     <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $service->title }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $service->icon }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                            <a href="{{ route('admin.services.show', $service) }}" class="text-blue-600 hover:text-blue-900">View</a>
-                            <a href="{{ route('admin.services.edit', $service) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </td>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Icon</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach($services as $service)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $service->title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $service->icon }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <a href="{{ route('admin.services.show', $service) }}" class="inline-block px-2 py-1 rounded text-xs font-medium transition" style="background-color: #dbeafe; color: #1e40af;">View</a>
+                                <a href="{{ route('admin.services.edit', $service) }}" class="inline-block px-2 py-1 rounded text-xs font-medium transition" style="background-color: #e0e7ff; color: #3730a3;">Edit</a>
+<form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this service?">
+                                     @csrf
+                                     @method('DELETE')
+                                     <button type="submit" class="px-2 py-1 rounded text-xs font-medium transition" style="background-color: #fee2e2; color: #b91c1c;">Delete</button>
+                                 </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="mt-4">
         {{ $services->links() }}

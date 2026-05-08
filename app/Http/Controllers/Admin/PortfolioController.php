@@ -13,6 +13,7 @@ class PortfolioController extends Controller
     public function index(): View
     {
         $projects = PortfolioProject::latest()->paginate(10);
+
         return view('admin.portfolio.index', compact('projects'));
     }
 
@@ -24,28 +25,31 @@ class PortfolioController extends Controller
     public function store(PortfolioRequest $request): RedirectResponse
     {
         PortfolioProject::create($request->validated());
+
         return redirect()->route('admin.portfolio.index')->with('success', 'Project created successfully.');
     }
 
-    public function show(PortfolioProject $portfolioProject): View
+    public function show(PortfolioProject $portfolio): View
     {
-        return view('admin.portfolio.show', compact('portfolioProject'));
+        return view('admin.portfolio.show', compact('portfolio'));
     }
 
-    public function edit(PortfolioProject $portfolioProject): View
+    public function edit(PortfolioProject $portfolio): View
     {
-        return view('admin.portfolio.edit', compact('portfolioProject'));
+        return view('admin.portfolio.edit', compact('portfolio'));
     }
 
-    public function update(PortfolioRequest $request, PortfolioProject $portfolioProject): RedirectResponse
+    public function update(PortfolioRequest $request, PortfolioProject $portfolio): RedirectResponse
     {
-        $portfolioProject->update($request->validated());
+        $portfolio->update($request->validated());
+
         return redirect()->route('admin.portfolio.index')->with('success', 'Project updated successfully.');
     }
 
-    public function destroy(PortfolioProject $portfolioProject): RedirectResponse
+    public function destroy(PortfolioProject $portfolio): RedirectResponse
     {
-        $portfolioProject->delete();
+        $portfolio->delete();
+
         return redirect()->route('admin.portfolio.index')->with('success', 'Project deleted successfully.');
     }
 }

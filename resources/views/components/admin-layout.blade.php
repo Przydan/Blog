@@ -5,12 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Blog Przydan') }} - Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        .sidebar-hidden { transform: translateX(100%) !important; }
+        .sidebar-visible { transform: translateX(0) !important; }
+        .mobile-drawer { transition: transform 0.3s ease-in-out; }
+    </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans antialiased flex">
-    <aside class="w-64 bg-slate-900 text-white min-h-screen p-4 flex flex-col">
-        <a href="{{ route('home') }}" class="text-xl font-bold mb-8 block text-center">
-            Admin Panel
-        </a>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col md:flex-row min-h-screen">
+    <!-- Mobile Header -->
+    <div class="md:hidden p-4 flex justify-between items-center sticky top-0 z-30 shadow-md" style="background-color: #0f172a; color: white;">
+        <span class="text-xl font-bold">Admin Panel</span>
+        <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-slate-800 focus:outline-none transition-colors" style="color: white;" aria-label="Toggle Menu">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Mobile Backdrop -->
+    <div id="mobile-backdrop" class="fixed inset-0 z-40 hidden md:hidden transition-opacity duration-300" style="background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);"></div>
+
+    <!-- Sidebar -->
+    <aside id="admin-sidebar" class="fixed inset-y-0 right-0 z-50 w-64 p-4 flex flex-col mobile-drawer sidebar-hidden md:relative md:translate-x-0 md:min-h-screen shadow-2xl" style="background-color: #0f172a; color: white;">
+        <div class="flex items-center justify-between mb-8">
+            <a href="{{ route('home') }}" class="text-xl font-bold text-white">
+                Admin Panel
+            </a>
+            <button id="close-sidebar" class="md:hidden p-2 text-slate-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div class="mb-6">
+            <a href="{{ route('home') }}" class="block px-4 py-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors bg-slate-800 rounded border border-slate-700 text-center">
+                &larr; View Public Site
+            </a>
+        </div>
+
         <nav class="flex-1 space-y-2">
             <a href="{{ route('admin.users.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.users.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
                 Users
@@ -24,6 +57,12 @@
             <a href="{{ route('admin.tags.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.tags.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
                 Tags
             </a>
+            <a href="{{ route('admin.portfolio.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.portfolio.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+                Portfolio
+            </a>
+            <a href="{{ route('admin.services.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.services.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+                Services
+            </a>
         </nav>
         <form method="POST" action="{{ route('logout') }}" class="mt-auto pt-4 border-t border-slate-800">
             @csrf
@@ -33,20 +72,20 @@
         </form>
     </aside>
 
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-4 md:p-8 relative">
         @if(session('success'))
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+            <div class="bg-green-50 border-l-4 border-green-400 text-green-700 px-4 py-3 rounded shadow-sm mb-4">
                 {{ session('success') }}
             </div>
         @endif
         @if(session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+            <div class="bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded shadow-sm mb-4">
                 {{ session('error') }}
             </div>
         @endif
         @if($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-                <ul>
+            <div class="bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded shadow-sm mb-4">
+                <ul class="list-disc list-inside">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
@@ -55,5 +94,42 @@
         @endif
         {{ $slot }}
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const closeButton = document.getElementById('close-sidebar');
+            const sidebar = document.getElementById('admin-sidebar');
+            const backdrop = document.getElementById('mobile-backdrop');
+
+            function toggleMenu(show) {
+                if (show) {
+                    sidebar.classList.remove('sidebar-hidden');
+                    sidebar.classList.add('sidebar-visible');
+                    backdrop.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                } else {
+                    sidebar.classList.remove('sidebar-visible');
+                    sidebar.classList.add('sidebar-hidden');
+                    backdrop.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            }
+
+            if (menuButton) menuButton.addEventListener('click', () => toggleMenu(true));
+            if (closeButton) closeButton.addEventListener('click', () => toggleMenu(false));
+            if (backdrop) backdrop.addEventListener('click', () => toggleMenu(false));
+        });
+
+        // Handle delete confirmations via event capture (submit events do not bubble)
+        document.addEventListener('submit', function(e) {
+            if (e.target && e.target.classList.contains('delete-form')) {
+                const message = e.target.dataset.confirm || 'Are you sure you want to delete this record?';
+                if (!confirm(message)) {
+                    e.preventDefault();
+                }
+            }
+        }, true);
+    </script>
 </body>
 </html>

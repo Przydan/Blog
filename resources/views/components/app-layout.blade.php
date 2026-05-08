@@ -8,11 +8,13 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased">
     <nav class="bg-white border-b border-gray-200 px-4 py-3">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <a href="{{ route('home') }}" class="text-xl font-bold text-blue-600 whitespace-nowrap">
                 {{ config('app.name', 'Przydan blog') }}
             </a>
             <div class="flex items-center gap-3 md:gap-4">
+                <a href="{{ route('portfolio') }}" class="text-sm text-gray-600 hover:text-gray-900">Portfolio</a>
+                <a href="{{ route('services') }}" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
                 @auth
                     @if(auth()->user()->isAuthor())
                         <a href="{{ route('admin.posts.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800">Admin Panel</a>

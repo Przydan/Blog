@@ -6,6 +6,10 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     Insights, tutorials, and stories from my journey in software engineering.
                 </p>
+                <div class="mt-6 flex justify-center gap-4">
+                    <a href="{{ route('portfolio') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">My Portfolio &rarr;</a>
+                    <a href="{{ route('services') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">Professional Services &rarr;</a>
+                </div>
             </div>
 
             <!-- Filters -->

@@ -12,26 +12,26 @@
             <div class="p-8 space-y-4">
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
                     <span class="text-sm font-medium text-gray-500">Title</span>
-                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolioProject->title }}</span>
+                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolio->title }}</span>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
                     <span class="text-sm font-medium text-gray-500">Description</span>
-                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolioProject->description }}</span>
+                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolio->description }}</span>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
                     <span class="text-sm font-medium text-gray-500">Link</span>
                     <span class="col-span-2 text-sm text-blue-600">
-                        <a href="{{ $portfolioProject->link }}" target="_blank">{{ $portfolioProject->link }}</a>
+                        <a href="{{ $portfolio->link }}" target="_blank">{{ $portfolio->link }}</a>
                     </span>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
                     <span class="text-sm font-medium text-gray-500">Image URL</span>
-                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolioProject->image_path }}</span>
+                    <span class="col-span-2 text-sm text-gray-900">{{ $portfolio->image_path }}</span>
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                     <span class="text-sm font-medium text-gray-500">Technologies</span>
                     <div class="col-span-2 flex flex-wrap gap-1">
-                        @foreach($portfolioProject->technologies ?? [] as $tech)
+                        @foreach($portfolio->technologies ?? [] as $tech)
                             <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600 border border-gray-200">
                                 {{ trim($tech) }}
                             </span>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-8 py-4 border-t border-gray-200 flex justify-end gap-4">
-                <a href="{{ route('admin.portfolio.edit', $portfolioProject) }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                <a href="{{ route('admin.portfolio.edit', $portfolio) }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
                     Edit Project
                 </a>
             </div>
