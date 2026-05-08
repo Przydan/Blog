@@ -14,13 +14,13 @@ class HomeController extends Controller
     {
         $query = Post::published()->orderBy('published_at', 'desc');
 
-        if ($request->has('category')) {
+        if ($request->filled('category')) {
             $query->whereHas('category', function ($q) use ($request) {
                 $q->where('slug', $request->category);
             });
         }
 
-        if ($request->has('tag')) {
+        if ($request->filled('tag')) {
             $query->whereHas('tags', function ($q) use ($request) {
                 $q->where('slug', $request->tag);
             });

@@ -15,6 +15,10 @@ The front-end stack is strictly Laravel Blade + Tailwind CSS v4 (no Vue/React/Li
 - Form Validation: Strict backend validation for required fields on all forms (registration, login, post creation, user edits).
 - Architecture: Strict adherence to the MVC (Model-View-Controller) pattern.
 
+<!-- ## PHASE 2 
+
+- Admin page -  -->
+
 ## Custom Pages
 
 - Portfolio: A dedicated page showcasing projects.

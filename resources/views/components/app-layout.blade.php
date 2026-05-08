@@ -14,6 +14,9 @@
             </a>
             <div class="flex items-center gap-3 md:gap-4">
                 @auth
+                    @if(auth()->user()->isAuthor())
+                        <a href="{{ route('admin.posts.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800">Admin Panel</a>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf
                         <button type="submit" class="text-sm text-gray-600 hover:text-gray-900">Logout</button>
