@@ -13,6 +13,7 @@ class ServiceController extends Controller
     public function index(): View
     {
         $services = Service::latest()->paginate(10);
+
         return view('admin.services.index', compact('services'));
     }
 
@@ -24,6 +25,7 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request): RedirectResponse
     {
         Service::create($request->validated());
+
         return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
     }
 
@@ -40,12 +42,14 @@ class ServiceController extends Controller
     public function update(ServiceRequest $request, Service $service): RedirectResponse
     {
         $service->update($request->validated());
+
         return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
     }
 
     public function destroy(Service $service): RedirectResponse
     {
         $service->delete();
+
         return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully.');
     }
 }

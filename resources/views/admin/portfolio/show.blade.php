@@ -21,7 +21,7 @@
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
                     <span class="text-sm font-medium text-gray-500">Link</span>
                     <span class="col-span-2 text-sm text-blue-600">
-                        <a href="{{ $portfolio->link }}" target="_blank">{{ $portfolio->link }}</a>
+                        <a href="{{ $portfolio->link }}" target="_blank" class="hover:underline hover:text-blue-800 transition-colors">{{ $portfolio->link }}</a>
                     </span>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 pb-4">
@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div class="bg-gray-50 px-8 py-4 border-t border-gray-200 flex justify-end gap-4">
-                <a href="{{ route('admin.portfolio.edit', $portfolio) }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+                <x-button variant="primary" href="{{ route('admin.portfolio.edit', $portfolio) }}">
                     Edit Project
-                </a>
+                </x-button>
             </div>
         </div>
     </div>

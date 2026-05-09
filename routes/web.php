@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -39,8 +40,8 @@ Route::middleware('auth')->group(function () {
             Route::resource('categories', CategoryController::class);
             Route::resource('tags', TagController::class);
             Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
-            Route::resource('portfolio', \App\Http\Controllers\Admin\PortfolioController::class);
-            Route::resource('services', \App\Http\Controllers\Admin\ServiceController::class);
+            Route::resource('portfolio', App\Http\Controllers\Admin\PortfolioController::class);
+            Route::resource('services', ServiceController::class);
         });
     });
 });

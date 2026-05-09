@@ -20,14 +20,13 @@ class PostFactory extends Factory
     public function definition(): array
     {
         $title = $this->faker->sentence(5);
-
         return [
             'category_id' => Category::factory(),
             'title' => $title,
             'slug' => Str::slug($title),
             'description' => $this->faker->paragraph(2),
             'content' => $this->faker->paragraphs(5, true),
-            'image_path' => 'https://picsum.photos/600/400?random='.$this->faker->numberBetween(1, 1000),
+            'image_path' => 'https://picsum.photos/600/400?random=' . $this->faker->numberBetween(1, 1000),
             'published_at' => $this->faker->dateTimeBetween('-30 days', 'now'),
         ];
     }

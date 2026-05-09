@@ -6,16 +6,18 @@
     <title>{{ config('app.name', 'Blog Przydan') }} - Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        .sidebar-hidden { transform: translateX(100%) !important; }
-        .sidebar-visible { transform: translateX(0) !important; }
-        .mobile-drawer { transition: transform 0.3s ease-in-out; }
+        @media (max-width: 767px) {
+            .sidebar-hidden { transform: translateX(-100%); }
+            .sidebar-visible { transform: translateX(0); }
+            .mobile-drawer { transition: transform 0.3s ease-in-out; }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col md:flex-row min-h-screen">
     <!-- Mobile Header -->
-    <div class="md:hidden p-4 flex justify-between items-center sticky top-0 z-30 shadow-md" style="background-color: #0f172a; color: white;">
+    <div class="md:hidden p-4 flex justify-between items-center sticky top-0 z-30 shadow-md bg-slate-900 text-white">
         <span class="text-xl font-bold">Admin Panel</span>
-        <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-slate-800 focus:outline-none transition-colors" style="color: white;" aria-label="Toggle Menu">
+        <button id="mobile-menu-button" class="p-2 rounded-md hover:bg-slate-800 focus:outline-none transition-colors text-white" aria-label="Toggle Menu">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
@@ -23,12 +25,12 @@
     </div>
 
     <!-- Mobile Backdrop -->
-    <div id="mobile-backdrop" class="fixed inset-0 z-40 hidden md:hidden transition-opacity duration-300" style="background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);"></div>
+    <div id="mobile-backdrop" class="fixed inset-0 z-40 hidden md:hidden transition-opacity duration-300 bg-slate-900/60 backdrop-blur-sm"></div>
 
     <!-- Sidebar -->
-    <aside id="admin-sidebar" class="fixed inset-y-0 right-0 z-50 w-64 p-4 flex flex-col mobile-drawer sidebar-hidden md:relative md:translate-x-0 md:min-h-screen shadow-2xl" style="background-color: #0f172a; color: white;">
+    <aside id="admin-sidebar" class="fixed inset-y-0 left-0 z-50 w-64 p-4 flex flex-col mobile-drawer sidebar-hidden md:relative md:translate-x-0 md:min-h-screen shadow-2xl bg-slate-900 text-white">
         <div class="flex items-center justify-between mb-8">
-            <a href="{{ route('home') }}" class="text-xl font-bold text-white">
+            <a href="{{ route('home') }}" class="text-xl font-bold text-white hover:text-slate-200 transition-colors">
                 Admin Panel
             </a>
             <button id="close-sidebar" class="md:hidden p-2 text-slate-400 hover:text-white transition-colors">
@@ -74,23 +76,19 @@
 
     <main class="flex-1 p-4 md:p-8 relative">
         @if(session('success'))
-            <div class="bg-green-50 border-l-4 border-green-400 text-green-700 px-4 py-3 rounded shadow-sm mb-4">
-                {{ session('success') }}
-            </div>
+            <x-alert type="success">{{ session('success') }}</x-alert>
         @endif
         @if(session('error'))
-            <div class="bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded shadow-sm mb-4">
-                {{ session('error') }}
-            </div>
+            <x-alert type="error">{{ session('error') }}</x-alert>
         @endif
         @if($errors->any())
-            <div class="bg-red-50 border-l-4 border-red-400 text-red-700 px-4 py-3 rounded shadow-sm mb-4">
+            <x-alert type="error">
                 <ul class="list-disc list-inside">
                     @foreach($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div>
+            </x-alert>
         @endif
         {{ $slot }}
     </main>

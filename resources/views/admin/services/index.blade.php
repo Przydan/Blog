@@ -22,12 +22,12 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $service->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $service->icon }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                                <a href="{{ route('admin.services.show', $service) }}" class="inline-block px-2 py-1 rounded text-xs font-medium transition" style="background-color: #dbeafe; color: #1e40af;">View</a>
-                                <a href="{{ route('admin.services.edit', $service) }}" class="inline-block px-2 py-1 rounded text-xs font-medium transition" style="background-color: #e0e7ff; color: #3730a3;">Edit</a>
-<form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this service?">
+                                <x-button variant="view" href="{{ route('admin.services.show', $service) }}" class="text-xs">View</x-button>
+                                <x-button variant="edit" href="{{ route('admin.services.edit', $service) }}" class="text-xs">Edit</x-button>
+                                <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this service?">
                                      @csrf
                                      @method('DELETE')
-                                     <button type="submit" class="px-2 py-1 rounded text-xs font-medium transition" style="background-color: #fee2e2; color: #b91c1c;">Delete</button>
+                                     <x-button variant="danger" type="submit" class="text-xs">Delete</x-button>
                                  </form>
                             </td>
                         </tr>

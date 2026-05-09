@@ -6,18 +6,14 @@
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     Insights, tutorials, and stories from my journey in software engineering.
                 </p>
-                <div class="mt-6 flex justify-center gap-4">
-                    <a href="{{ route('portfolio') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">My Portfolio &rarr;</a>
-                    <a href="{{ route('services') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">Professional Services &rarr;</a>
-                </div>
             </div>
 
             <!-- Filters -->
             <div class="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <form method="GET" action="{{ route('home') }}" class="flex flex-col md:flex-row flex-wrap gap-4 items-center w-full md:w-auto">
-                    <div class="flex items-center gap-2 w-full md:w-auto">
-                        <span class="text-sm font-medium text-gray-500 whitespace-nowrap">Category:</span>
-                        <select name="category" onchange="this.form.submit()" class="w-full md:w-auto text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                <form method="GET" action="{{ route('home') }}" class="flex flex-wrap gap-4 items-center">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-medium text-gray-500">Category:</span>
+                        <select name="category" onchange="this.form.submit()" class="text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                             <option value="">All Categories</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
@@ -26,9 +22,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="flex items-center gap-2 w-full md:w-auto">
-                        <span class="text-sm font-medium text-gray-500 whitespace-nowrap">Tag:</span>
-                        <select name="tag" onchange="this.form.submit()" class="w-full md:w-auto text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-medium text-gray-500">Tag:</span>
+                        <select name="tag" onchange="this.form.submit()" class="text-sm border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
                             <option value="">All Tags</option>
                             @foreach($tags as $tag)
                                 <option value="{{ $tag->slug }}" {{ request('tag') == $tag->slug ? 'selected' : '' }}>
@@ -38,7 +34,7 @@
                         </select>
                     </div>
                     @if(request()->has('category') || request()->has('tag'))
-                        <a href="{{ route('home') }}" class="text-sm text-blue-600 hover:underline w-full md:w-auto text-center">Clear Filters</a>
+                        <a href="{{ route('home') }}" class="text-sm text-blue-600 hover:underline">Clear Filters</a>
                     @endif
                 </form>
             </div>

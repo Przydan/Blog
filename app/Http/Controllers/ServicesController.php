@@ -11,6 +11,7 @@ class ServicesController extends Controller
     public function index(Request $request): View
     {
         $services = Service::latest()->get();
+
         return view('services', compact('services'));
     }
 }

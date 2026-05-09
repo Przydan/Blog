@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Enums\Role;
 use App\Models\User;
+use App\Enums\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,7 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password'),
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
             'role' => Role::Administrator,
         ]);
 
@@ -29,7 +28,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Author User',
             'email' => 'author@example.com',
-            'password' => Hash::make('password'),
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
             'role' => Role::Author,
         ]);
 
@@ -37,7 +36,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Reader User',
             'email' => 'reader@example.com',
-            'password' => Hash::make('password'),
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
             'role' => Role::Reader,
         ]);
 

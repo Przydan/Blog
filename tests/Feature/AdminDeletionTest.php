@@ -4,17 +4,18 @@ namespace Tests\Feature;
 
 use App\Enums\Role;
 use App\Models\Category;
+use App\Models\PortfolioProject;
 use App\Models\Post;
+use App\Models\Service;
 use App\Models\Tag;
 use App\Models\User;
-use App\Models\PortfolioProject;
-use App\Models\Service;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class AdminDeletionTest extends TestCase
 {
     use RefreshDatabase;
+    private User $admin;
 
     protected function setUp(): void
     {
@@ -27,7 +28,7 @@ class AdminDeletionTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->delete(route('admin.users.destroy', $user));
-        
+
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
         $response->assertRedirect(route('admin.users.index'));
     }
@@ -37,7 +38,7 @@ class AdminDeletionTest extends TestCase
         $category = Category::factory()->create();
         $post = Post::factory()->create(['category_id' => $category->id]);
         $response = $this->delete(route('admin.posts.destroy', $post));
-        
+
         $this->assertDatabaseMissing('posts', ['id' => $post->id]);
         $response->assertRedirect(route('admin.posts.index'));
     }
@@ -46,7 +47,7 @@ class AdminDeletionTest extends TestCase
     {
         $category = Category::factory()->create();
         $response = $this->delete(route('admin.categories.destroy', $category));
-        
+
         $this->assertDatabaseMissing('categories', ['id' => $category->id]);
         $response->assertRedirect(route('admin.categories.index'));
     }
@@ -55,7 +56,7 @@ class AdminDeletionTest extends TestCase
     {
         $tag = Tag::factory()->create();
         $response = $this->delete(route('admin.tags.destroy', $tag));
-        
+
         $this->assertDatabaseMissing('tags', ['id' => $tag->id]);
         $response->assertRedirect(route('admin.tags.index'));
     }
@@ -67,7 +68,7 @@ class AdminDeletionTest extends TestCase
             'description' => 'Test Description',
         ]);
         $response = $this->delete(route('admin.portfolio.destroy', $project));
-        
+
         $this->assertDatabaseMissing('portfolio_projects', ['id' => $project->id]);
         $response->assertRedirect(route('admin.portfolio.index'));
     }
@@ -79,10 +80,8 @@ class AdminDeletionTest extends TestCase
             'description' => 'Test Description',
         ]);
         $response = $this->delete(route('admin.services.destroy', $service));
-        
+
         $this->assertDatabaseMissing('services', ['id' => $service->id]);
         $response->assertRedirect(route('admin.services.index'));
     }
-
-
 }

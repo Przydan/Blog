@@ -28,6 +28,7 @@ class ServiceRequest extends FormRequest
                 'details' => array_map('trim', explode(',', $this->details)),
             ]);
         }
+
         return parent::passedValidation();
     }
 }

@@ -29,6 +29,7 @@ class PortfolioRequest extends FormRequest
                 'technologies' => array_map('trim', explode(',', $this->technologies)),
             ]);
         }
+
         return parent::passedValidation();
     }
 }
