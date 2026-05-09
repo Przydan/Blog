@@ -9,3 +9,29 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer base {
+    :root {
+        --color-primary: var(--color-blue-600);
+        --color-primary-hover: var(--color-blue-700);
+        --color-primary-light: var(--color-blue-400);
+    }
+
+    .theme-emerald {
+        --color-primary: var(--color-emerald-600);
+        --color-primary-hover: var(--color-emerald-700);
+        --color-primary-light: var(--color-emerald-400);
+    }
+
+    .theme-indigo {
+        --color-primary: var(--color-indigo-600);
+        --color-primary-hover: var(--color-indigo-700);
+        --color-primary-light: var(--color-indigo-400);
+    }
+
+    .theme-amber {
+        --color-primary: var(--color-amber-600);
+        --color-primary-hover: var(--color-amber-700);
+        --color-primary-light: var(--color-amber-400);
+    }
+}

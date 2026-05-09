@@ -9,7 +9,7 @@
 <body class="bg-gray-50 text-gray-900 font-sans antialiased dark:bg-slate-900 dark:text-slate-100 theme-{{ $siteSettings->color_scheme }}">
     <nav class="bg-white border-b border-gray-200 px-4 py-3 dark:bg-slate-800 dark:border-slate-700">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <a href="{{ route('home') }}" class="text-xl font-bold text-{{ $siteSettings->color_scheme }}-600 hover:text-{{ $siteSettings->color_scheme }}-700 transition-colors whitespace-nowrap dark:text-{{ $siteSettings->color_scheme }}-400">
+            <a href="{{ route('home') }}" class="text-xl font-bold text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors whitespace-nowrap dark:text-[var(--color-primary-light)]">
                 {{ $siteSettings->blog_name }}
             </a>
             <div class="flex items-center gap-3 md:gap-4">

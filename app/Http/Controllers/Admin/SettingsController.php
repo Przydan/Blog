@@ -20,9 +20,13 @@ class SettingsController
     {
         $data = $request->except('_token', '_method');
 
-        // Handle dark_mode switch which might be missing if unchecked
-        if (! isset($data['dark_mode'])) {
-            $data['dark_mode'] = 'off';
+        // Handle dark_mode toggle
+        $data['dark_mode'] = $request->has('dark_mode') ? 'on' : 'off';
+
+        // Handle supported languages array
+        if ($request->has('languages')) {
+            $data['supported_languages'] = implode(',', $request->languages);
+            unset($data['languages']);
         }
 
         foreach ($data as $key => $value) {

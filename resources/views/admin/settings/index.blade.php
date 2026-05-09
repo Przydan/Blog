@@ -30,9 +30,19 @@
                     <label for="color_scheme" class="block text-sm font-medium text-gray-700 mb-2">Schemat kolorów</label>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach(['blue' => 'Niebieski', 'emerald' => 'Szmaragdowy', 'indigo' => 'Indygo', 'amber' => 'Bursztynowy'] as $value => $label)
-                            <label class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 {{ $settings->get('color_scheme', 'blue') === $value ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-gray-200' }}">
-                                <input type="radio" name="color_scheme" value="{{ $value }}" {{ $settings->get('color_scheme', 'blue') === $value ? 'checked' : '' }} class="sr-only">
-                                <div class="w-8 h-8 rounded-full shadow-inner bg-{{ $value === 'blue' ? 'blue' : ($value === 'emerald' ? 'emerald' : ($value === 'indigo' ? 'indigo' : 'amber')) }}-500"></div>
+                            @php
+                                $colorClass = match($value) {
+                                    'blue' => 'bg-blue-500',
+                                    'emerald' => 'bg-emerald-500',
+                                    'indigo' => 'bg-indigo-500',
+                                    'amber' => 'bg-amber-500',
+                                    default => 'bg-slate-500'
+                                };
+                                $isActive = $settings->get('color_scheme', 'blue') === $value;
+                            @endphp
+                            <label class="relative flex flex-col items-center gap-2 p-4 border rounded-lg cursor-pointer hover:bg-gray-50 {{ $isActive ? 'border-blue-500 bg-blue-50 ring-1 ring-blue-500' : 'border-gray-200' }}">
+                                <input type="radio" name="color_scheme" value="{{ $value }}" {{ $isActive ? 'checked' : '' }} class="sr-only">
+                                <div class="w-8 h-8 rounded-full shadow-inner {{ $colorClass }}"></div>
                                 <span class="text-xs font-medium">{{ $label }}</span>
                             </label>
                         @endforeach
@@ -41,9 +51,16 @@
 
                 <!-- Languages -->
                 <div>
-                    <label for="supported_languages" class="block text-sm font-medium text-gray-700 mb-1">Obsługiwane języki</label>
-                    <p class="text-xs text-gray-500 mb-2">Wpisz kody języków oddzielone przecinkiem (np. pl,en,de).</p>
-                    <input type="text" name="supported_languages" id="supported_languages" value="{{ $settings->get('supported_languages', 'pl,en') }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Obsługiwane języki</label>
+                    <div class="flex flex-wrap gap-4">
+                        @php $activeLangs = explode(',', $settings->get('supported_languages', 'pl,en')); @endphp
+                        @foreach(['pl' => 'Polski', 'en' => 'English', 'de' => 'Deutsch', 'es' => 'Español', 'fr' => 'Français'] as $code => $name)
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="languages[]" value="{{ $code }}" {{ in_array($code, $activeLangs) ? 'checked' : '' }} class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                <span class="text-sm text-gray-700">{{ $name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 

@@ -13,6 +13,7 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServicesController;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/health', function () {
@@ -20,7 +21,10 @@ Route::get('/health', function () {
 });
 
 Route::get('/language/{lang}', function ($lang) {
-    if (in_array($lang, ['en', 'pl'])) {
+    $supported = explode(',', Setting::get('supported_languages', 'pl,en'));
+    $supported = array_map('trim', $supported);
+
+    if (in_array($lang, $supported)) {
         session(['locale' => $lang]);
     }
 
@@ -58,7 +62,7 @@ Route::middleware('auth')->group(function () {
             Route::resource('services', ServiceController::class);
             Route::resource('inquiries', AdminInquiryController::class)->only(['index', 'show']);
             Route::get('settings', [SettingsController::class, 'index'])->name('settings.index');
-            Route::post('settings', [SettingsController::class, 'update'])->name('settings.update');
+            Route::patch('settings', [SettingsController::class, 'update'])->name('settings.update');
             Route::patch('inquiries/{inquiry}/status', [AdminInquiryController::class, 'updateStatus'])->name('inquiries.update-status');
             Route::post('inquiries/{inquiry}/comments', [AdminInquiryController::class, 'storeComment'])->name('inquiries.store-comment');
             Route::post('inquiries/{inquiry}/response', [AdminInquiryController::class, 'storeResponse'])->name('inquiries.store-response');
