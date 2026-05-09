@@ -46,6 +46,10 @@ class UserController
 
     public function update(UserRequest $request, User $user): RedirectResponse
     {
+        if (str_ends_with($user->email, '@przydan.org')) {
+            return back()->with('error', 'Nie można edytować konta administratora z domeny przydan.org.');
+        }
+
         $data = $request->validated();
 
         if (! empty($data['password'])) {
@@ -64,6 +68,11 @@ class UserController
         // Prevent self-deletion
         if ($user->id === auth()->id()) {
             return back()->with('error', 'You cannot delete your own account.');
+        }
+
+        // Prevent deletion of przydan.org admin accounts
+        if (str_ends_with($user->email, '@przydan.org')) {
+            return back()->with('error', 'Nie można usunąć konta administratora z domeny przydan.org.');
         }
 
         $user->delete();

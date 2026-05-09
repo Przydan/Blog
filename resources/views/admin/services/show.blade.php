@@ -25,10 +25,15 @@
                 <div class="grid grid-cols-3 gap-4">
                     <span class="text-sm font-medium text-gray-500">Details</span>
                     <div class="col-span-2 flex flex-wrap gap-1">
-                        @foreach($service->details ?? [] as $detail)
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600 border border-gray-200">
-                                {{ trim($detail) }}
-                            </span>
+                        @php
+                            $details = is_array($service->details) ? $service->details : explode(',', $service->details ?? '');
+                        @endphp
+                        @foreach($details as $detail)
+                            @if(trim($detail))
+                                <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600 border border-gray-200">
+                                    {{ trim($detail) }}
+                                </span>
+                            @endif
                         @endforeach
                     </div>
                 </div>

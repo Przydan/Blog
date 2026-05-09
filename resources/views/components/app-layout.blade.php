@@ -13,6 +13,7 @@
                 {{ config('app.name', 'Przydan blog') }}
             </a>
             <div class="flex items-center gap-3 md:gap-4">
+                <x-language-switcher />
                 <a href="{{ route('portfolio') }}" class="text-sm text-gray-600 hover:text-gray-900">Portfolio</a>
                 <a href="{{ route('services') }}" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
                 @auth

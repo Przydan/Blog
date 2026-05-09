@@ -31,10 +31,15 @@
                 <div class="grid grid-cols-3 gap-4">
                     <span class="text-sm font-medium text-gray-500">Technologies</span>
                     <div class="col-span-2 flex flex-wrap gap-1">
-                        @foreach($portfolio->technologies ?? [] as $tech)
-                            <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600 border border-gray-200">
-                                {{ trim($tech) }}
-                            </span>
+                        @php
+                            $technologies = is_array($portfolio->technologies) ? $portfolio->technologies : explode(',', $portfolio->technologies ?? '');
+                        @endphp
+                        @foreach($technologies as $tech)
+                            @if(trim($tech))
+                                <span class="px-2 py-0.5 rounded-full text-xs bg-gray-100 text-gray-600 border border-gray-200">
+                                    {{ trim($tech) }}
+                                </span>
+                            @endif
                         @endforeach
                     </div>
                 </div>

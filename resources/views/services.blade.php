@@ -9,13 +9,13 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($services as $service)
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 transition-colors duration-300 text-center">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 transition-colors duration-300 text-center flex flex-col h-full">
                     <div class="text-5xl mb-6">{{ $service['icon'] }}</div>
                     <h3 class="text-2xl font-bold mb-4">{{ $service['title'] }}</h3>
-                    <p class="text-gray-600 mb-6">
+                    <p class="text-gray-600 mb-6 flex-grow">
                         {{ $service['description'] }}
                     </p>
-                    <ul class="text-left space-y-2 mb-8 max-w-xs mx-auto">
+                    <ul class="text-center space-y-2 mb-8 max-w-xs mx-auto">
                         @php
                             $details = $service['details'];
                             if (is_string($details)) {
@@ -24,7 +24,7 @@
                         @endphp
                         @if(is_iterable($details))
                             @foreach($details as $detail)
-                                <li class="flex items-center gap-2 text-sm text-gray-600">
+                                <li class="flex items-center justify-center gap-2 text-sm text-gray-900 font-semibold">
                                     <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -33,8 +33,8 @@
                             @endforeach
                         @endif
                     </ul>
-                    <a href="#" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition font-medium">
-                        Get a Quote
+                    <a href="{{ route('inquiries.create', $service->id) }}" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition font-medium mt-auto">
+                        Wyślij zapytanie
                     </a>
                 </div>
             @endforeach

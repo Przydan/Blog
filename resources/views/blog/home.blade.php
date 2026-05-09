@@ -60,7 +60,7 @@
                             <div class="p-6 flex flex-col flex-1">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 border border-blue-100">
-                                        {{ $post->category->name }}
+                                        {{ $post->category?->name ?? 'Uncategorized' }}
                                     </span>
                                     <span class="text-xs text-gray-400">
                                         {{ $post->published_at->format('M d, Y') }}
