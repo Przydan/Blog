@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Enums\Role;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ class CheckRole
             return redirect()->route('login');
         }
 
+        /** @var User $user */
         $user = Auth::user();
 
         foreach ($roles as $role) {
