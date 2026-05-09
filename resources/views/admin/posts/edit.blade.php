@@ -61,16 +61,16 @@
                 </div>
             </div>
             <div class="flex justify-end gap-4 pt-4">
-                <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this post?">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium">Delete Post</button>
-                </form>
                 <a href="{{ route('admin.posts.index') }}" class="px-4 py-2 text-gray-600 hover:text-gray-900">Cancel</a>
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
                     Update Post
                 </button>
             </div>
+        </form>
+        <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this post?">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
         </form>
     </div>
 </x-admin-layout>

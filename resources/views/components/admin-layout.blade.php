@@ -121,12 +121,14 @@
             if (backdrop) backdrop.addEventListener('click', () => toggleMenu(false));
         });
 
-        // Handle delete confirmations via event capture (submit events do not bubble)
+        // Global handler for delete confirmations
+        // We use capture phase (true) because submit events do not bubble
         document.addEventListener('submit', function(e) {
             if (e.target && e.target.classList.contains('delete-form')) {
                 const message = e.target.dataset.confirm || 'Are you sure you want to delete this record?';
                 if (!confirm(message)) {
                     e.preventDefault();
+                    e.stopPropagation();
                 }
             }
         }, true);
