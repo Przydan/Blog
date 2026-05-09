@@ -7,6 +7,17 @@
 
         <form method="POST" action="{{ route('admin.posts.store') }}" class="bg-white p-8 rounded-lg shadow border border-gray-200 space-y-6">
             @csrf
+            
+            @if ($errors->any())
+                <div class="bg-red-100 text-red-700 p-4 rounded-md">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 space-y-6">
                     <div>
@@ -54,7 +65,15 @@
                         <input type="text" name="image_path" id="image_path" value="{{ old('image_path') }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label for="published_at" class="block text-sm font-medium text-gray-700 mb-1">Publish Date</label>
+                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                        <select name="status" id="status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                            <option value="draft" {{ old('status', 'draft') == 'draft' ? 'selected' : '' }}>Draft</option>
+                            <option value="published" {{ old('status') == 'published' ? 'selected' : '' }}>Published</option>
+                            <option value="deleted" {{ old('status') == 'deleted' ? 'selected' : '' }}>Deleted</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="published_at" class="block text-sm font-medium text-gray-700 mb-1">Data publikacji (RRRR-MM-DD GG:MM)</label>
                         <input type="datetime-local" name="published_at" id="published_at" value="{{ old('published_at') }}" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>

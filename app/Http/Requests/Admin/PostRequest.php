@@ -23,6 +23,7 @@ class PostRequest extends FormRequest
             'content' => ['required', 'string'],
             'image_path' => ['nullable', 'string'],
             'published_at' => ['nullable', 'date'],
+            'status' => ['required', 'string', 'in:draft,published,deleted'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['exists:tags,id'],
         ];

@@ -69,4 +69,14 @@ class PostController
 
         return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully.');
     }
+
+    public function publish(Post $post): RedirectResponse
+    {
+        $post->update([
+            'status' => Post::STATUS_PUBLISHED,
+            'published_at' => now(),
+        ]);
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post published successfully.');
+    }
 }

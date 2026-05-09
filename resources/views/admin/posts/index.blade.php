@@ -23,13 +23,22 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ $post->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $post->category->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                @if($post->published_at && $post->published_at <= now())
+                                @if($post->status === \App\Models\Post::STATUS_PUBLISHED)
                                     <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Published</span>
+                                @elseif($post->status === \App\Models\Post::STATUS_DELETED)
+                                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">Deleted</span>
                                 @else
                                     <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Draft</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                @if($post->status === \App\Models\Post::STATUS_DRAFT)
+                                    <form method="POST" action="{{ route('admin.posts.publish', $post) }}" class="inline">
+                                        @csrf
+                                        @method('PATCH')
+                                        <x-button variant="view" type="submit">Publish</x-button>
+                                    </form>
+                                @endif
                                 <x-button variant="view" href="{{ route('admin.posts.show', $post) }}">View</x-button>
                                 <x-button variant="edit" href="{{ route('admin.posts.edit', $post) }}">Edit</x-button>
                                 <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this post?">

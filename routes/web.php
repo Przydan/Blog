@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::middleware('role:administrator,author')->group(function () {
             Route::resource('categories', CategoryController::class);
             Route::resource('tags', TagController::class);
+            Route::patch('posts/{post}/publish', [App\Http\Controllers\Admin\PostController::class, 'publish'])->name('posts.publish');
             Route::resource('posts', App\Http\Controllers\Admin\PostController::class);
             Route::resource('portfolio', App\Http\Controllers\Admin\PortfolioController::class);
             Route::resource('services', ServiceController::class);

@@ -13,6 +13,12 @@ class Post extends Model
     /** @use HasFactory<PostFactory> */
     use HasFactory;
 
+    const STATUS_DRAFT = 'draft';
+
+    const STATUS_PUBLISHED = 'published';
+
+    const STATUS_DELETED = 'deleted';
+
     protected $fillable = [
         'category_id',
         'title',
@@ -21,6 +27,7 @@ class Post extends Model
         'content',
         'image_path',
         'published_at',
+        'status',
     ];
 
     protected $casts = [
@@ -39,6 +46,8 @@ class Post extends Model
 
     public function scopePublished($query)
     {
-        return $query->whereNotNull('published_at')->where('published_at', '<=', now());
+        return $query->where('status', self::STATUS_PUBLISHED)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 }
