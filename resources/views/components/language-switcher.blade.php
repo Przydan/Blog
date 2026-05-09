@@ -1,4 +1,7 @@
 <div class="flex gap-2">
-    <a href="{{ route('language.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'font-bold' : '' }}">EN</a>
-    <a href="{{ route('language.switch', 'pl') }}" class="{{ app()->getLocale() == 'pl' ? 'font-bold' : '' }}">PL</a>
+    @foreach($siteSettings->supported_languages as $lang)
+        <a href="{{ route('language.switch', trim($lang)) }}" class="{{ app()->getLocale() == trim($lang) ? 'font-bold' : '' }} uppercase text-xs">
+            {{ trim($lang) }}
+        </a>
+    @endforeach
 </div>

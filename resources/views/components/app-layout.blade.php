@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="{{ $siteSettings->dark_mode ? 'dark' : '' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Przydan blog') }}</title>
+    <title>{{ $siteSettings->blog_name }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
-    <nav class="bg-white border-b border-gray-200 px-4 py-3">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased dark:bg-slate-900 dark:text-slate-100 theme-{{ $siteSettings->color_scheme }}">
+    <nav class="bg-white border-b border-gray-200 px-4 py-3 dark:bg-slate-800 dark:border-slate-700">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-            <a href="{{ route('home') }}" class="text-xl font-bold text-blue-600 hover:text-blue-700 transition-colors whitespace-nowrap">
-                {{ config('app.name', 'Przydan blog') }}
+            <a href="{{ route('home') }}" class="text-xl font-bold text-{{ $siteSettings->color_scheme }}-600 hover:text-{{ $siteSettings->color_scheme }}-700 transition-colors whitespace-nowrap dark:text-{{ $siteSettings->color_scheme }}-400">
+                {{ $siteSettings->blog_name }}
             </a>
             <div class="flex items-center gap-3 md:gap-4">
                 <x-language-switcher />

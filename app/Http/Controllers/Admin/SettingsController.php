@@ -11,16 +11,25 @@ class SettingsController
 {
     public function index(): View
     {
-        $settings = Setting::all()->pluck('value', 'key');
+        $settings = new Setting;
 
         return view('admin.settings.index', compact('settings'));
     }
 
     public function update(Request $request): RedirectResponse
     {
-        foreach ($request->except('_token', '_method') as $key => $value) {
+        $data = $request->except('_token', '_method');
+
+        // Handle dark_mode switch which might be missing if unchecked
+        if (! isset($data['dark_mode'])) {
+            $data['dark_mode'] = 'off';
+        }
+
+        foreach ($data as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
+
+        Setting::clearCache();
 
         return back()->with('success', 'Ustawienia zapisane.');
     }
