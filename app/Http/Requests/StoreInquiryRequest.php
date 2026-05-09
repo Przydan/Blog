@@ -28,6 +28,7 @@ class StoreInquiryRequest extends FormRequest
             'phone' => 'required|string|max:20',
             'message' => 'required|string',
             'service_id' => 'required|exists:services,id',
+            'honeypot' => 'nullable|max:0',
         ];
     }
 }

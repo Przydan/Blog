@@ -30,7 +30,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 Route::get('/services', [ServicesController::class, 'index'])->name('services');
 Route::get('/quote/{service}', [InquiryController::class, 'create'])->name('inquiries.create');
-Route::post('/inquiries', [InquiryController::class, 'store'])->name('inquiries.store');
+Route::post('/inquiries', [InquiryController::class, 'store'])->name('inquiries.store')->middleware('throttle:5,1');
 Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show');
 
 Route::middleware('guest')->group(function () {

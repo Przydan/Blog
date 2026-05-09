@@ -7,6 +7,11 @@
                 @csrf
                 <input type="hidden" name="service_id" value="{{ $service->id }}">
                 
+                <div style="display:none;">
+                    <label for="honeypot">Leave this field empty</label>
+                    <input type="text" name="honeypot" id="honeypot">
+                </div>
+
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700">Imię i nazwisko</label>
                     <input type="text" name="name" id="name" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
