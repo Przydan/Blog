@@ -1,5 +1,5 @@
 <x-admin-layout>
-    <div class="max-w-4xl mx-auto">
+    <div class="w-full">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.posts.index') }}" class="text-blue-600 hover:underline">&larr; Back to Posts</a>
             <h1 class="text-2xl font-bold">Edit Post</h1>

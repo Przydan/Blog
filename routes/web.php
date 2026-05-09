@@ -45,6 +45,3 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-
-// Include blog routes
-require __DIR__.'/blog/web.php';

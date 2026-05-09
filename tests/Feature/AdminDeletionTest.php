@@ -15,6 +15,7 @@ use Tests\TestCase;
 class AdminDeletionTest extends TestCase
 {
     use RefreshDatabase;
+
     private User $admin;
 
     protected function setUp(): void
