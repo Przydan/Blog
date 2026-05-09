@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PostStatus;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,12 +13,6 @@ class Post extends Model
 {
     /** @use HasFactory<PostFactory> */
     use HasFactory;
-
-    const STATUS_DRAFT = 'draft';
-
-    const STATUS_PUBLISHED = 'published';
-
-    const STATUS_DELETED = 'deleted';
 
     protected $fillable = [
         'category_id',
@@ -30,9 +25,18 @@ class Post extends Model
         'status',
     ];
 
-    protected $casts = [
-        'published_at' => 'datetime',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+            'status' => PostStatus::class,
+        ];
+    }
 
     public function category(): BelongsTo
     {
@@ -44,9 +48,24 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function isPublished(): bool
+    {
+        return $this->status === PostStatus::Published;
+    }
+
+    public function isDraft(): bool
+    {
+        return $this->status === PostStatus::Draft;
+    }
+
+    public function isDeleted(): bool
+    {
+        return $this->status === PostStatus::Deleted;
+    }
+
     public function scopePublished($query)
     {
-        return $query->where('status', self::STATUS_PUBLISHED)
+        return $query->where('status', PostStatus::Published)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
     }

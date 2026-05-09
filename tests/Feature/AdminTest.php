@@ -79,10 +79,36 @@ class AdminTest extends TestCase
             'slug' => 'test-post',
             'description' => 'Short desc',
             'content' => 'Long content',
+            'status' => 'published',
             'tags' => [],
         ]);
 
         $this->assertDatabaseHas('posts', ['slug' => 'test-post']);
+        $response->assertRedirect('/admin/posts');
+    }
+
+    public function test_author_can_update_post_with_date(): void
+    {
+        $author = User::factory()->create(['role' => Role::Author]);
+        $category = Category::factory()->create();
+        $post = Post::factory()->create(['category_id' => $category->id]);
+        $this->actingAs($author);
+
+        $response = $this->put("/admin/posts/{$post->id}", [
+            'category_id' => $category->id,
+            'title' => 'Updated Title With Date',
+            'slug' => 'updated-slug',
+            'description' => 'Updated desc',
+            'content' => 'Updated content',
+            'status' => 'published',
+            'published_at' => '2026-05-09T15:30',
+            'tags' => [],
+        ]);
+
+        $this->assertDatabaseHas('posts', [
+            'title' => 'Updated Title With Date',
+            'published_at' => '2026-05-09 15:30:00',
+        ]);
         $response->assertRedirect('/admin/posts');
     }
 
@@ -100,6 +126,7 @@ class AdminTest extends TestCase
             'slug' => $post->slug,
             'description' => 'Updated desc',
             'content' => 'Updated content',
+            'status' => 'published',
             'tags' => [$tags[0]->id, $tags[1]->id],
         ]);
 

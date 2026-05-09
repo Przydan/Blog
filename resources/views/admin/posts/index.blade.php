@@ -22,24 +22,19 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">{{ $post->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $post->category->name ?? 'Uncategorized' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                @if($post->status === \App\Models\Post::STATUS_PUBLISHED)
-                                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Published</span>
-                                @elseif($post->status === \App\Models\Post::STATUS_DELETED)
-                                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">Deleted</span>
-                                @else
-                                    <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">Draft</span>
-                                @endif
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium border {{ $post->status->color() }}">
+                                    {{ $post->status->label() }}
+                                </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
-                                @if($post->status === \App\Models\Post::STATUS_DRAFT)
+                                @if($post->isDraft())
                                     <form method="POST" action="{{ route('admin.posts.publish', $post) }}" class="inline">
                                         @csrf
                                         @method('PATCH')
                                         <x-button variant="view" type="submit">Publish</x-button>
                                     </form>
-                                @endif
-                                <x-button variant="view" href="{{ route('admin.posts.show', $post) }}">View</x-button>
+                                @endif                                <x-button variant="view" href="{{ route('admin.posts.show', $post) }}">View</x-button>
                                 <x-button variant="edit" href="{{ route('admin.posts.edit', $post) }}">Edit</x-button>
 
                             </td>

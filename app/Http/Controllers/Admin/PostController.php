@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PostStatus;
 use App\Http\Requests\Admin\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
@@ -20,8 +21,8 @@ class PostController
 
     public function create(): View
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $categories = Category::orderBy('name')->pluck('name', 'id');
+        $tags = Tag::orderBy('name')->get();
 
         return view('admin.posts.create', compact('categories', 'tags'));
     }
@@ -29,7 +30,8 @@ class PostController
     public function store(PostRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $tags = $request->tags ?? [];
+        $tags = $data['tags'] ?? [];
+        unset($data['tags']);
 
         $post = Post::create($data);
         $post->tags()->sync($tags);
@@ -46,8 +48,8 @@ class PostController
 
     public function edit(Post $post): View
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $categories = Category::orderBy('name')->pluck('name', 'id');
+        $tags = Tag::orderBy('name')->get();
 
         return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
@@ -55,7 +57,8 @@ class PostController
     public function update(PostRequest $request, Post $post): RedirectResponse
     {
         $data = $request->validated();
-        $tags = $request->tags ?? [];
+        $tags = $data['tags'] ?? [];
+        unset($data['tags']);
 
         $post->update($data);
         $post->tags()->sync($tags);
@@ -73,7 +76,7 @@ class PostController
     public function publish(Post $post): RedirectResponse
     {
         $post->update([
-            'status' => Post::STATUS_PUBLISHED,
+            'status' => PostStatus::Published,
             'published_at' => now(),
         ]);
 

@@ -26,8 +26,8 @@
                 <p class="text-xl text-gray-600 mb-8 italic border-l-4 border-blue-500 pl-4">
                     {{ $post->description }}
                 </p>
-                <div class="whitespace-pre-line">
-                    {{ $post->content }}
+                <div>
+                    {!! Str::markdown($post->content) !!}
                 </div>
             </div>
 

@@ -23,7 +23,12 @@ class PortfolioController
 
     public function store(PortfolioRequest $request): RedirectResponse
     {
-        PortfolioProject::create($request->validated());
+        $data = $request->validated();
+        if (! empty($data['technologies'])) {
+            $data['technologies'] = array_map('trim', explode(',', $data['technologies']));
+        }
+
+        PortfolioProject::create($data);
 
         return redirect()->route('admin.portfolio.index')->with('success', 'Project created successfully.');
     }
@@ -40,7 +45,12 @@ class PortfolioController
 
     public function update(PortfolioRequest $request, PortfolioProject $portfolio): RedirectResponse
     {
-        $portfolio->update($request->validated());
+        $data = $request->validated();
+        if (! empty($data['technologies'])) {
+            $data['technologies'] = array_map('trim', explode(',', $data['technologies']));
+        }
+
+        $portfolio->update($data);
 
         return redirect()->route('admin.portfolio.index')->with('success', 'Project updated successfully.');
     }

@@ -23,7 +23,12 @@ class ServiceController
 
     public function store(ServiceRequest $request): RedirectResponse
     {
-        Service::create($request->validated());
+        $data = $request->validated();
+        if (! empty($data['details'])) {
+            $data['details'] = array_map('trim', explode(',', $data['details']));
+        }
+
+        Service::create($data);
 
         return redirect()->route('admin.services.index')->with('success', 'Service created successfully.');
     }
@@ -40,7 +45,12 @@ class ServiceController
 
     public function update(ServiceRequest $request, Service $service): RedirectResponse
     {
-        $service->update($request->validated());
+        $data = $request->validated();
+        if (! empty($data['details'])) {
+            $data['details'] = array_map('trim', explode(',', $data['details']));
+        }
+
+        $service->update($data);
 
         return redirect()->route('admin.services.index')->with('success', 'Service updated successfully.');
     }

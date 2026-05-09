@@ -23,7 +23,11 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $inquiry->service->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $inquiry->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $inquiry->phone }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ucfirst($inquiry->status) }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2.5 py-0.5 rounded-full text-xs font-medium border {{ $inquiry->status->color() }}">
+                                    {{ $inquiry->status->label() }}
+                                </span>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <x-button variant="view" href="{{ route('admin.inquiries.show', $inquiry) }}" class="text-xs">Podgląd</x-button>
                             </td>
@@ -32,5 +36,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="mt-4">
+        {{ $inquiries->links() }}
     </div>
 </x-admin-layout>

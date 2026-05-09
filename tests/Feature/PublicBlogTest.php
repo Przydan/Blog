@@ -14,13 +14,11 @@ class PublicBlogTest extends TestCase
 
     public function test_home_page_displays_published_posts(): void
     {
-        Post::factory()->create([
+        Post::factory()->published()->create([
             'title' => 'Published Post',
-            'published_at' => now(),
         ]);
-        Post::factory()->create([
+        Post::factory()->draft()->create([
             'title' => 'Draft Post',
-            'published_at' => null,
         ]);
 
         $response = $this->get('/');
@@ -35,8 +33,8 @@ class PublicBlogTest extends TestCase
         $cat1 = Category::factory()->create(['slug' => 'cat1']);
         $cat2 = Category::factory()->create(['slug' => 'cat2']);
 
-        Post::factory()->create(['category_id' => $cat1->id, 'title' => 'Post 1', 'published_at' => now()]);
-        Post::factory()->create(['category_id' => $cat2->id, 'title' => 'Post 2', 'published_at' => now()]);
+        Post::factory()->published()->create(['category_id' => $cat1->id, 'title' => 'Post 1']);
+        Post::factory()->published()->create(['category_id' => $cat2->id, 'title' => 'Post 2']);
 
         $response = $this->get('/?category=cat1');
 
@@ -49,10 +47,10 @@ class PublicBlogTest extends TestCase
         $tag1 = Tag::factory()->create(['slug' => 'tag1']);
         $tag2 = Tag::factory()->create(['slug' => 'tag2']);
 
-        $post1 = Post::factory()->create(['title' => 'Post 1', 'published_at' => now()]);
+        $post1 = Post::factory()->published()->create(['title' => 'Post 1']);
         $post1->tags()->attach($tag1);
 
-        $post2 = Post::factory()->create(['title' => 'Post 2', 'published_at' => now()]);
+        $post2 = Post::factory()->published()->create(['title' => 'Post 2']);
         $post2->tags()->attach($tag2);
 
         $response = $this->get('/?tag=tag1');
@@ -63,10 +61,9 @@ class PublicBlogTest extends TestCase
 
     public function test_can_view_single_post(): void
     {
-        $post = Post::factory()->create([
+        $post = Post::factory()->published()->create([
             'title' => 'Single Post',
             'slug' => 'single-post',
-            'published_at' => now(),
         ]);
 
         $response = $this->get('/posts/single-post');
@@ -77,9 +74,8 @@ class PublicBlogTest extends TestCase
 
     public function test_cannot_view_draft_post(): void
     {
-        Post::factory()->create([
+        Post::factory()->draft()->create([
             'slug' => 'draft-post',
-            'published_at' => null,
         ]);
 
         $response = $this->get('/posts/draft-post');

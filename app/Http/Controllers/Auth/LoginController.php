@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -21,6 +22,9 @@ class LoginController
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+        // Debug: Log attempts (in production, do NOT log passwords!)
+        Log::info('Login attempt for email: '.$request->email);
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();

@@ -14,19 +14,19 @@
             </a>
             <div class="flex items-center gap-3 md:gap-4">
                 <x-language-switcher />
-                <a href="{{ route('portfolio') }}" class="text-sm text-gray-600 hover:text-gray-900">Portfolio</a>
-                <a href="{{ route('services') }}" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
+                <a href="{{ route('portfolio') }}" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Portfolio') }}</a>
+                <a href="{{ route('services') }}" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Services') }}</a>
                 @auth
                     @if(auth()->user()->isAuthor())
-                        <a href="{{ route('admin.posts.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800">Admin Panel</a>
+                        <a href="{{ route('admin.posts.index') }}" class="text-sm font-medium text-blue-600 hover:text-blue-800">{{ __('Admin Panel') }}</a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf
-                        <button type="submit" class="text-sm text-gray-600 hover:text-gray-900">Logout</button>
+                        <button type="submit" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Logout') }}</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">Login</a>
-                    <a href="{{ route('register') }}" class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">Register</a>
+                    <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900">{{ __('Login') }}</a>
+                    <a href="{{ route('register') }}" class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">{{ __('Register') }}</a>
                 @endauth
             </div>
         </div>

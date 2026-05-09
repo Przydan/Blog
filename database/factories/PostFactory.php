@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PostStatus;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,7 +29,24 @@ class PostFactory extends Factory
             'description' => $this->faker->paragraph(2),
             'content' => $this->faker->paragraphs(5, true),
             'image_path' => 'https://picsum.photos/600/400?random='.$this->faker->numberBetween(1, 1000),
-            'published_at' => $this->faker->dateTimeBetween('-30 days', 'now'),
+            'published_at' => null,
+            'status' => PostStatus::Draft,
         ];
+    }
+
+    public function published(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => PostStatus::Published,
+            'published_at' => now(),
+        ]);
+    }
+
+    public function draft(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => PostStatus::Draft,
+            'published_at' => null,
+        ]);
     }
 }

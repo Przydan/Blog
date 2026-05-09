@@ -16,19 +16,8 @@ class ServiceRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'icon' => ['nullable', 'string'],
+            'icon' => ['nullable', 'string', 'max:255'],
             'details' => ['nullable', 'string'],
         ];
-    }
-
-    protected function passedValidation()
-    {
-        if ($this->has('details')) {
-            $this->merge([
-                'details' => array_map('trim', explode(',', $this->details)),
-            ]);
-        }
-
-        return parent::passedValidation();
     }
 }

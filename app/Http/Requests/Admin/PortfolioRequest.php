@@ -16,20 +16,18 @@ class PortfolioRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'image_path' => ['nullable', 'string'],
-            'link' => ['nullable', 'string'],
+            'image_path' => ['nullable', 'string', 'max:255'],
+            'link' => ['nullable', 'string', 'max:255'],
             'technologies' => ['nullable', 'string'],
         ];
     }
 
-    protected function passedValidation()
+    protected function prepareForValidation(): void
     {
-        if ($this->has('technologies')) {
+        if ($this->has('technologies') && is_array($this->technologies)) {
             $this->merge([
-                'technologies' => array_map('trim', explode(',', $this->technologies)),
+                'technologies' => implode(', ', $this->technologies),
             ]);
         }
-
-        return parent::passedValidation();
     }
 }

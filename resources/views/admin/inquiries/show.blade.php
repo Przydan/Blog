@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            @if($inquiry->status === 'completed')
+            @if($inquiry->status === \App\Enums\InquiryStatus::Completed)
                 <div class="bg-white p-8 rounded-lg shadow border border-gray-200">
                     <h2 class="text-xl font-bold mb-4">Odpowiedź dla klienta</h2>
                     <form action="{{ route('admin.inquiries.store-response', $inquiry) }}" method="POST">
@@ -71,8 +71,8 @@
             <form action="{{ route('admin.inquiries.update-status', $inquiry) }}" method="POST">
                 @csrf @method('PATCH')
                 <select name="status" class="w-full border border-gray-300 rounded p-2 mb-4">
-                    @foreach(['pending', 'in_progress', 'completed', 'cancelled'] as $status)
-                        <option value="{{ $status }}" {{ $inquiry->status === $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                    @foreach(\App\Enums\InquiryStatus::cases() as $status)
+                        <option value="{{ $status->value }}" {{ $inquiry->status === $status ? 'selected' : '' }}>{{ $status->label() }}</option>
                     @endforeach
                 </select>
                 <button type="submit" class="w-full bg-blue-600 text-white px-4 py-2 rounded">Zmień status</button>

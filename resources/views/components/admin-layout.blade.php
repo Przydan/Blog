@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Blog Przydan') }} - Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <style>
         @media (max-width: 767px) {
             .sidebar-hidden { transform: translateX(-100%); }
@@ -67,6 +69,9 @@
             </a>
             <a href="{{ route('admin.inquiries.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.inquiries.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
                 Zapytania
+            </a>
+            <a href="{{ route('admin.settings.index') }}" class="block px-4 py-2 rounded transition {{ request()->routeIs('admin.settings.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+                Ustawienia
             </a>
         </nav>
         <form method="POST" action="{{ route('logout') }}" class="mt-auto pt-4 border-t border-slate-800">
@@ -133,6 +138,13 @@
                 }
             }
         }, true);
+
+        // Initialize Markdown Editor
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.markdown-editor').forEach(element => {
+                new EasyMDE({ element: element });
+            });
+        });
     </script>
 </body>
 </html>

@@ -12,9 +12,9 @@
                 <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200 hover:border-blue-500 transition-colors duration-300 text-center flex flex-col h-full">
                     <div class="text-5xl mb-6">{{ $service['icon'] }}</div>
                     <h3 class="text-2xl font-bold mb-4">{{ $service['title'] }}</h3>
-                    <p class="text-gray-600 mb-6 flex-grow">
-                        {{ $service['description'] }}
-                    </p>
+                    <div class="text-gray-600 mb-6 flex-grow prose">
+                        {!! Str::markdown($service->description) !!}
+                    </div>
                     <ul class="text-center space-y-2 mb-8 max-w-xs mx-auto">
                         @php
                             $details = $service['details'];

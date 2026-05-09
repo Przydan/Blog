@@ -13,7 +13,9 @@
                     <img src="{{ $project->image_path }}" alt="{{ $project->title }}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2">{{ $project->title }}</h3>
-                        <p class="text-gray-600 mb-4">{{ $project->description }}</p>
+                        <div class="text-gray-600 mb-4 prose">
+                            {!! Str::markdown($project->description) !!}
+                        </div>
                         <div class="flex flex-wrap gap-2 mb-6">
                             @php
                                 $techs = $project->technologies;
