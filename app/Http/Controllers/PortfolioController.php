@@ -6,7 +6,7 @@ use App\Models\PortfolioProject;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class PortfolioController extends Controller
+class PortfolioController
 {
     public function index(Request $request): View
     {

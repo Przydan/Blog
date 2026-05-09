@@ -6,7 +6,7 @@ use App\Models\Post;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PostController extends Controller
+class PostController
 {
     public function show(string $slug): View
     {

@@ -6,7 +6,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ServicesController extends Controller
+class ServicesController
 {
     public function index(Request $request): View
     {
