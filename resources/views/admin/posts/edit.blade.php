@@ -2,7 +2,7 @@
     <div class="w-full">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.posts.index') }}" class="text-blue-600 hover:underline">&larr; Back to Posts</a>
-            <h1 class="text-2xl font-bold dark:text-white">Edit Post</h1>
+            <h1 class="text-2xl font-bold dark:text-white">{{ __("Edit Post") }}</h1>
         </div>
 
         <form method="POST" action="{{ route('admin.posts.update', $post) }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6" novalidate>
@@ -22,25 +22,25 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 space-y-6">
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                        <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Title") }}</label>
                         <input type="text" name="title" id="title" value="{{ old('title', $post->title) }}" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
                     <div>
-                        <label for="slug" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Slug</label>
+                        <label for="slug" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Slug") }}</label>
                         <input type="text" name="slug" id="slug" value="{{ old('slug', $post->slug) }}" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     </div>
                     <div>
-                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Short Description</label>
+                        <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Short Description") }}</label>
                         <textarea name="description" id="description" rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>{{ old('description', $post->description) }}</textarea>
                     </div>
                     <div>
-                        <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Content</label>
+                        <label for="content" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Content") }}</label>
                         <textarea name="content" id="content" rows="12" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 markdown-editor" required>{{ old('content', $post->content) }}</textarea>
                     </div>
                 </div>
                 <div class="space-y-6">
                     <div>
-                        <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Category</label>
+                        <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Category") }}</label>
                         <select name="category_id" id="category_id" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             <option value="">Select Category</option>
                             @foreach($categories as $id => $name)
@@ -62,11 +62,11 @@
                         </div>
                     </div>
                     <div>
-                        <label for="image_path" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Image URL</label>
+                        <label for="image_path" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Image URL") }}</label>
                         <input type="text" name="image_path" id="image_path" value="{{ old('image_path', $post->image_path) }}" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
+                        <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Status") }}</label>
                         <select name="status" id="status" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                             @foreach(\App\Enums\PostStatus::cases() as $status)
                                 <option value="{{ $status->value }}" {{ old('status', $post->status->value) == $status->value ? 'selected' : '' }}>
@@ -76,22 +76,22 @@
                         </select>
                     </div>
                     <div>
-                        <label for="published_at" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data publikacji (RRRR-MM-DD GG:MM)</label>
+                        <label for="published_at" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Publication Date (YYYY-MM-DD HH:MM)") }}</label>
                         <input type="datetime-local" name="published_at" id="published_at" value="{{ old('published_at', $post->published_at?->format('Y-m-d\TH:i')) }}" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
             </div>
             <div class="flex justify-end gap-4 pt-4">
-                <a href="{{ route('admin.posts.index') }}" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white">Cancel</a>
+                <a href="{{ route('admin.posts.index') }}" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white">{{ __("Cancel") }}</a>
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
                     Update Post
                 </button>
             </div>
         </form>
-        <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this post?">
+        <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" class="inline delete-form" data-confirm="{{ __("Are you sure you want to delete this") }} post?">
             @csrf
             @method('DELETE')
-            <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
+            <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium" onclick="return confirm('{{ __("Are you sure you want to delete this") }} post?')">Delete Post</button>
         </form>
     </div>
 </x-admin-layout>

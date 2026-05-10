@@ -11,10 +11,10 @@
         <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
             <thead class="bg-gray-50 dark:bg-slate-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Title") }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Category") }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Status") }}</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Actions") }}</th>
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
@@ -31,10 +31,10 @@
                                     <form method="POST" action="{{ route('admin.posts.publish', $post) }}" class="inline">
                                         @csrf
                                         @method('PATCH')
-                                        <x-button variant="view" type="submit">Publish</x-button>
+                                        <x-button variant="view" type="submit">{{ __("Publish") }}</x-button>
                                     </form>
-                                @endif                                <x-button variant="view" href="{{ route('admin.posts.show', $post) }}">View</x-button>
-                                <x-button variant="edit" href="{{ route('admin.posts.edit', $post) }}">Edit</x-button>
+                                @endif                                <x-button variant="view" href="{{ route('admin.posts.show', $post) }}">{{ __("View") }}</x-button>
+                                <x-button variant="edit" href="{{ route('admin.posts.edit', $post) }}">{{ __("Edit") }}</x-button>
 
                             </td>
                         </tr>

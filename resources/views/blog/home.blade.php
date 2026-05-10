@@ -2,9 +2,9 @@
     <div class="container mx-auto px-4 py-12">
         <div class="max-w-6xl mx-auto">
             <div class="mb-12 text-center">
-                <h1 class="text-4xl font-bold mb-4 dark:text-white">Blog</h1>
+                <h1 class="text-4xl font-bold mb-4 dark:text-white">{{ __('Blog') }}</h1>
                 <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                    Insights, tutorials, and stories from my journey in software engineering.
+                    {{ __('Insights, tutorials, and stories from my journey in software engineering.') }}
                 </p>
             </div>
 
@@ -12,9 +12,9 @@
             <div class="mb-12 flex flex-col md:flex-row gap-6 items-center justify-between bg-white dark:bg-slate-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 transition-colors">
                 <form method="GET" action="{{ route('home') }}" class="flex flex-wrap gap-4 items-center">
                     <div class="flex items-center gap-2">
-                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Category:</span>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Category:') }}</span>
                         <select name="category" onchange="this.form.submit()" class="text-sm border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">All Categories</option>
+                            <option value="">{{ __('All Categories') }}</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->slug }}" {{ request('category') == $category->slug ? 'selected' : '' }}>
                                     {{ $category->name }}
@@ -23,9 +23,9 @@
                         </select>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">Tag:</span>
+                        <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ __('Tag:') }}</span>
                         <select name="tag" onchange="this.form.submit()" class="text-sm border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-gray-200 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">All Tags</option>
+                            <option value="">{{ __('All Tags') }}</option>
                             @foreach($tags as $tag)
                                 <option value="{{ $tag->slug }}" {{ request('tag') == $tag->slug ? 'selected' : '' }}>
                                     {{ $tag->name }}
@@ -34,7 +34,7 @@
                         </select>
                     </div>
                     @if(request()->has('category') || request()->has('tag'))
-                        <a href="{{ route('home') }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Clear Filters</a>
+                        <a href="{{ route('home') }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">{{ __('Clear Filters') }}</a>
                     @endif
                 </form>
             </div>
@@ -60,7 +60,7 @@
                             <div class="p-6 flex flex-col flex-1">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span class="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-600 border border-blue-100 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-800/50">
-                                        {{ $post->category?->name ?? 'Uncategorized' }}
+                                        {{ $post->category?->name ?? __('Uncategorized') }}
                                     </span>
                                     <span class="text-xs text-gray-400 dark:text-gray-500">
                                         {{ $post->published_at->format('M d, Y') }}
@@ -74,7 +74,7 @@
                                 </p>
                                 <div class="mt-auto">
                                     <a href="{{ route('posts.show', $post->slug) }}" class="inline-block text-blue-600 dark:text-blue-400 font-semibold hover:underline text-sm">
-                                        Read More →
+                                        {{ __('Read More →') }}
                                     </a>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                 </div>
             @else
                 <div class="bg-blue-50 dark:bg-slate-800 border-l-4 border-blue-500 p-6 rounded text-center dark:border-blue-700 transition-colors">
-                    <p class="text-gray-700 dark:text-gray-300 text-lg">No posts found matching your criteria.</p>
+                    <p class="text-gray-700 dark:text-gray-300 text-lg">{{ __('No posts found matching your criteria.') }}</p>
                 </div>
             @endif
         </div>

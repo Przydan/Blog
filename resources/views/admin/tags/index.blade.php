@@ -11,9 +11,9 @@
         <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
             <thead class="bg-gray-50 dark:bg-slate-700">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Slug</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Name") }}</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Slug") }}</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">{{ __("Actions") }}</th>
                 </tr>
             </thead>
             <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
@@ -21,12 +21,12 @@
                     <tr>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white dark:text-white">{{ $tag->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $tag->slug }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">                                <x-button variant="view" href="{{ route('admin.tags.show', $tag) }}" class="text-xs">View</x-button>
-                                <x-button variant="edit" href="{{ route('admin.tags.edit', $tag) }}" class="text-xs">Edit</x-button>
-                                <form method="POST" action="{{ route('admin.tags.destroy', $tag) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this tag?">
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">                                <x-button variant="view" href="{{ route('admin.tags.show', $tag) }}" class="text-xs">{{ __("View") }}</x-button>
+                                <x-button variant="edit" href="{{ route('admin.tags.edit', $tag) }}" class="text-xs">{{ __("Edit") }}</x-button>
+                                <form method="POST" action="{{ route('admin.tags.destroy', $tag) }}" class="inline delete-form" data-confirm="{{ __("Are you sure you want to delete this") }} tag?">
                                      @csrf
                                      @method('DELETE')
-                                     <x-button variant="danger" type="submit" class="text-xs">Delete</x-button>
+                                     <x-button variant="danger" type="submit" class="text-xs">{{ __("Delete") }}</x-button>
                                  </form>
                             </td>
                         </tr>

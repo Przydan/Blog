@@ -2,20 +2,20 @@
     <div class="max-w-2xl mx-auto">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.categories.index') }}" class="text-blue-600 hover:underline">&larr; Back to Categories</a>
-            <h1 class="text-2xl font-bold dark:text-white">Category Details</h1>
+            <h1 class="text-2xl font-bold dark:text-white">{{ __("Category Details") }}</h1>
         </div>
 
         <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-gray-200 dark:border-slate-700 overflow-hidden">
             <div class="bg-gray-50 dark:bg-slate-700 px-8 py-4 border-b border-gray-200 dark:border-slate-600">
-                <h2 class="text-lg font-semibold dark:text-white">General Information</h2>
+                <h2 class="text-lg font-semibold dark:text-white">{{ __("General Information") }}</h2>
             </div>
             <div class="p-8 space-y-4">
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 dark:border-slate-700 pb-4">
-                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Name</span>
+                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">{{ __("Name") }}</span>
                     <span class="col-span-2 text-sm text-gray-900 dark:text-white">{{ $category->name }}</span>
                 </div>
                 <div class="grid grid-cols-3 gap-4 border-b border-gray-100 dark:border-slate-700 pb-4">
-                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">Slug</span>
+                    <span class="text-sm font-medium text-gray-500 dark:text-slate-400">{{ __("Slug") }}</span>
                     <span class="col-span-2 text-sm text-gray-900 dark:text-white">{{ $category->slug }}</span>
                 </div>
                 <div class="grid grid-cols-3 gap-4">

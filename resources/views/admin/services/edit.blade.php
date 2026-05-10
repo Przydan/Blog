@@ -2,7 +2,7 @@
     <div class="max-w-2xl mx-auto">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.services.index') }}" class="text-blue-600 hover:underline">&larr; Back to Services</a>
-            <h1 class="text-2xl font-bold dark:text-white">Edit Service</h1>
+            <h1 class="text-2xl font-bold dark:text-white">{{ __("Edit Service") }}</h1>
         </div>
 
         <form method="POST" action="{{ route('admin.services.update', $service) }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6">
@@ -13,7 +13,7 @@
                 <input type="text" name="title" id="title" value="{{ old('title', $service->title) }}" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div>
-                <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{{ __("Description") }}</label>
                 <textarea name="description" id="description" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 markdown-editor" required>{{ old('description', $service->description) }}</textarea>
             </div>
             <div>
@@ -25,16 +25,16 @@
                         <input type="text" name="details" id="details" value="{{ old('details', is_array($service->details) ? implode(', ', $service->details) : $service->details) }}" placeholder="CMS, E-commerce, Corporate Sites" class="w-full px-3 py-2 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
             <div class="flex justify-end gap-4 pt-4">
-                <a href="{{ route('admin.services.index') }}" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white">Cancel</a>
+                <a href="{{ route('admin.services.index') }}" class="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:text-white">{{ __("Cancel") }}</a>
                 <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
                     Update Service
                 </button>
             </div>
         </form>
-        <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline delete-form" data-confirm="Are you sure you want to delete this service?">
+        <form method="POST" action="{{ route('admin.services.destroy', $service) }}" class="inline delete-form" data-confirm="{{ __("Are you sure you want to delete this") }} service?">
             @csrf
             @method('DELETE')
-            <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium" onclick="return confirm('Are you sure you want to delete this service?')">Delete Service</button>
+            <button type="submit" class="px-4 py-2 text-red-600 hover:text-red-800 transition font-medium" onclick="return confirm('{{ __("Are you sure you want to delete this") }} service?')">Delete Service</button>
         </form>
     </div>
 </x-admin-layout>

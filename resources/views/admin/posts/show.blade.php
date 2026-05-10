@@ -2,12 +2,12 @@
     <div class="max-w-4xl mx-auto">
         <div class="flex items-center gap-4 mb-6">
             <a href="{{ route('admin.posts.index') }}" class="text-blue-600 hover:underline">&larr; Back to Posts</a>
-            <h1 class="text-2xl font-bold dark:text-white">Post Details</h1>
+            <h1 class="text-2xl font-bold dark:text-white">{{ __("Post Details") }}</h1>
         </div>
 
         <div class="bg-white dark:bg-slate-800 rounded-lg shadow border border-gray-200 dark:border-slate-700 overflow-hidden">
             <div class="bg-gray-50 dark:bg-slate-700 px-8 py-4 border-b border-gray-200 dark:border-slate-600 flex justify-between items-center">
-                <h2 class="text-lg font-semibold dark:text-white dark:text-white">Content Overview</h2>
+                <h2 class="text-lg font-semibold dark:text-white dark:text-white">{{ __("Content Overview") }}</h2>
                 <span class="px-2 py-1 rounded-full text-xs font-semibold 
                     {{ $post->published_at && $post->published_at <= now() ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400' }}">
                     {{ $post->published_at && $post->published_at <= now() ? 'Published' : 'Draft' }}
