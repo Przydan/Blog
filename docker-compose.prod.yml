@@ -58,6 +58,7 @@ services:
     command: tunnel --no-autoupdate run
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+      - TUNNEL_PIDFILE=${TUNNEL_PIDFILE}
     depends_on:
       - web
 
