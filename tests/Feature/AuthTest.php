@@ -10,32 +10,10 @@ class AuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_user_can_register(): void
+    public function test_registration_is_disabled(): void
     {
-        $response = $this->post('/register', [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-
-        $this->assertDatabaseHas('users', ['email' => 'test@example.com']);
-        $response->assertRedirect('/');
-        $this->assertAuthenticated();
-    }
-
-    public function test_user_cannot_register_with_existing_email(): void
-    {
-        User::factory()->create(['email' => 'existing@example.com']);
-
-        $response = $this->post('/register', [
-            'name' => 'New User',
-            'email' => 'existing@example.com',
-            'password' => 'password',
-            'password_confirmation' => 'password',
-        ]);
-
-        $response->assertSessionHasErrors('email');
+        $this->get('/register')->assertStatus(404);
+        $this->post('/register', [])->assertStatus(404);
     }
 
     public function test_user_can_login(): void
@@ -77,5 +55,23 @@ class AuthTest extends TestCase
 
         $response->assertRedirect('/');
         $this->assertGuest();
+    }
+
+    public function test_login_is_rate_limited(): void
+    {
+        $user = User::factory()->create();
+
+        for ($i = 0; $i < 5; $i++) {
+            $this->post('/login', [
+                'email' => $user->email,
+                'password' => 'wrong',
+            ])->assertStatus(302);
+        }
+
+        // 6th attempt should be throttled
+        $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'wrong',
+        ])->assertStatus(429);
     }
 }

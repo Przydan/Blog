@@ -54,7 +54,6 @@
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">{{ __('Login') }}</a>
-                    <a href="{{ route('register') }}" class="text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition">{{ __('Register') }}</a>
                 @endauth
             </div>
         </div>

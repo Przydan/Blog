@@ -19,8 +19,5 @@
                 {{ __('Sign In') }}
             </button>
         </form>
-        <div class="mt-6 text-center">
-            <p class="text-sm text-gray-600 dark:text-gray-400">{{ __("Don't have an account?") }} <a href="{{ route('register') }}" class="text-blue-600 dark:text-blue-400 hover:underline">{{ __('Register here') }}</a></p>
-        </div>
     </div>
 </x-app-layout>
