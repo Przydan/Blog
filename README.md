@@ -101,10 +101,19 @@ For production environments, use the optimized multi-stage build and Cloudflare 
 Ensure you have a **Cloudflare Tunnel Token**. You can get this from the Cloudflare Zero Trust dashboard.
 
 ### 2. Configure Environment
-Create a `.env.prod` or set variables in your shell:
+Create a `.env.prod` or set variables in your shell. **Note:** You must generate an `APP_KEY` locally using `php artisan key:generate --show` and paste it here.
+
 ```env
+# Your Cloudflare Tunnel Token
 CLOUDFLARE_TUNNEL_TOKEN=your_token_here
+# Your production domain
 DOMAIN=blog.twojadomena.pl
+# Laravel encryption key (REQUIRED)
+APP_KEY=base64:wygenerowany_klucz_tutaj=
+
+# Database configuration (Postgres)
+DB_DATABASE=blog_prod
+DB_USERNAME=blog_user
 DB_PASSWORD=wybierz_silne_haslo
 ```
 
