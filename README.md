@@ -29,28 +29,69 @@ A simple personal blog and portfolio platform built with **Laravel 13**, **Tailw
 
 ## 🚀 Setup Instructions
 
-### 1. Install dependencies
-```bash
-composer install
-npm install
-```
+### Option A: Docker Setup (Recommended)
 
-### 2. Environment Configuration
-```bash
-cp .env.example .env
-php artisan key:generate
-```
+For the easiest setup, you can use Docker. This project includes a `docker-compose.yml` configuration using a lightweight Alpine PostgreSQL database.
 
-### 3. Database Migration & Seeding
-```bash
-php artisan migrate:fresh --seed
-```
-*Note: The seeder creates an administrator account and sample content.*
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/blog-przydan.git
+   cd blog-przydan
+   ```
 
-### 4. Build Frontend Assets
-```bash
-npm run build
-```
+2. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   ```
+   Update your `.env` to use the Docker database:
+   ```env
+   DB_CONNECTION=pgsql
+   DB_HOST=pgsql
+   DB_PORT=5432
+   DB_DATABASE=blog
+   DB_USERNAME=sail
+   DB_PASSWORD=password
+   ```
+
+3. **Run the Application**
+   ```bash
+   # Start containers
+   docker compose up -d
+
+   # Install dependencies
+   docker compose exec laravel.test composer install
+   docker compose exec laravel.test npm install
+   docker compose exec laravel.test npm run build
+
+   # Generate key and migrate
+   docker compose exec laravel.test php artisan key:generate
+   docker compose exec laravel.test php artisan migrate:fresh --seed
+   ```
+
+### Option B: Local Setup
+
+1. **Install dependencies**
+   ```bash
+   composer install
+   npm install
+   ```
+
+2. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+3. **Database Migration & Seeding**
+   ```bash
+   php artisan migrate:fresh --seed
+   ```
+   *Note: The seeder creates an administrator account and sample content.*
+
+4. **Build Frontend Assets**
+   ```bash
+   npm run build
+   ```
 
 ## 🔒 Default Credentials
 
