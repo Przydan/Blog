@@ -5,7 +5,7 @@
             <h1 class="text-2xl font-bold dark:text-white">{{ __("Create Project") }}</h1>
         </div>
 
-        <form method="POST" action="{{ route('admin.portfolio.store') }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6">
+        <form method="POST" action="{{ route('admin.portfolio.store') }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6" novalidate>
             @csrf
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Project Title</label>

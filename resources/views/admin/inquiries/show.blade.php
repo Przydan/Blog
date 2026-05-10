@@ -61,7 +61,7 @@
                 <form action="{{ route('admin.inquiries.store-comment', $inquiry) }}" method="POST" class="mt-4">
                     @csrf
                     <textarea name="comment" rows="2" class="w-full border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded p-2 mb-2" placeholder="{{ __("Add note...") }}"></textarea>
-                    <button type="submit" class="bg-slate-800 text-white px-4 py-2 rounded">{{ __("Add note...") }}utton>
+                    <button type="submit" class="bg-slate-800 text-white px-4 py-2 rounded">{{ __("Add note...") }}</button>
                 </form>
             </div>
         </div>

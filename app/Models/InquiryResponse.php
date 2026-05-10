@@ -9,10 +9,18 @@ class InquiryResponse extends Model
 {
     protected $fillable = ['inquiry_id', 'user_id', 'message', 'is_sent', 'sent_at'];
 
-    protected $casts = [
-        'sent_at' => 'datetime',
-        'is_sent' => 'boolean',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'sent_at' => 'datetime',
+            'is_sent' => 'boolean',
+        ];
+    }
 
     public function user(): BelongsTo
     {

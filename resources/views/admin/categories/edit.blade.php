@@ -5,7 +5,7 @@
             <h1 class="text-2xl font-bold dark:text-white">{{ __("Edit Category") }}</h1>
         </div>
 
-        <form method="POST" action="{{ route('admin.categories.update', $category) }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6">
+        <form method="POST" action="{{ route('admin.categories.update', $category) }}" class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow border border-gray-200 dark:border-slate-700 space-y-6" novalidate>
             @csrf
             @method('PUT')
             <div>

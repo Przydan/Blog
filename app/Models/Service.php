@@ -11,7 +11,15 @@ class Service extends Model
 
     protected $fillable = ['title', 'description', 'icon', 'details'];
 
-    protected $casts = [
-        'details' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'details' => 'array',
+        ];
+    }
 }
