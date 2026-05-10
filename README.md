@@ -93,6 +93,41 @@ For the easiest setup, you can use Docker. This project includes a `docker-compo
    npm run build
    ```
 
+## 🌐 Production Deployment (Docker + Cloudflare)
+
+For production environments, use the optimized multi-stage build and Cloudflare Tunnel integration.
+
+### 1. Preparation
+Ensure you have a **Cloudflare Tunnel Token**. You can get this from the Cloudflare Zero Trust dashboard.
+
+### 2. Configure Environment
+Create a `.env.prod` or set variables in your shell:
+```env
+CLOUDFLARE_TUNNEL_TOKEN=your_token_here
+DOMAIN=blog.twojadomena.pl
+DB_PASSWORD=wybierz_silne_haslo
+```
+
+### 3. Deploy
+```bash
+# Build and start the production stack
+docker compose -f docker-compose.prod.yml up -d --build
+```
+
+The stack includes:
+- **PHP 8.4-FPM Alpine:** Optimized with OPcache and JIT.
+- **Nginx Alpine:** High-performance web server.
+- **PostgreSQL 16 Alpine:** Database with persistent volume.
+- **Cloudflare Tunnel:** Connects your local server to the internet without opening ports.
+
+### 4. Updates
+To deploy updates:
+```bash
+git pull
+docker compose -f docker-compose.prod.yml up -d --build
+```
+*The entrypoint script automatically handles configuration caching and migrations.*
+
 ## 🔒 Default Credentials
 
 After running the seeders, you can access the admin panel at `/login`:
