@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,15 +23,5 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') !== 'local') {
             URL::forceScheme('https');
         }
-
-        View::composer('*', function ($view) {
-            $settings = [
-                'blog_name' => Setting::get('blog_name', config('app.name')),
-                'dark_mode' => Setting::get('dark_mode', 'off') === 'on',
-                'color_scheme' => Setting::get('color_scheme', 'blue'),
-                'supported_languages' => explode(',', Setting::get('supported_languages', 'pl,en')),
-            ];
-            $view->with('siteSettings', (object) $settings);
-        });
     }
 }

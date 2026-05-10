@@ -1,7 +1,4 @@
 <div class="flex gap-2">
-    @foreach($siteSettings->supported_languages as $lang)
-        <a href="{{ route('language.switch', trim($lang)) }}" class="{{ app()->getLocale() == trim($lang) ? 'font-bold' : '' }} uppercase text-xs">
-            {{ trim($lang) }}
-        </a>
-    @endforeach
+    <a href="{{ route('language.switch', 'en') }}" class="{{ app()->getLocale() == 'en' ? 'font-bold underline' : '' }} text-xs uppercase hover:text-blue-600 transition">EN</a>
+    <a href="{{ route('language.switch', 'pl') }}" class="{{ app()->getLocale() == 'pl' ? 'font-bold underline' : '' }} text-xs uppercase hover:text-blue-600 transition">PL</a>
 </div>

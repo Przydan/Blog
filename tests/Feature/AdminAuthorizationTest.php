@@ -38,7 +38,8 @@ class AdminAuthorizationTest extends TestCase
         $this->actingAs($author);
         $response = $this->delete(route('admin.users.destroy', $user));
 
-        $response->assertStatus(403);
+        $response->assertRedirect();
+        $response->assertSessionHas('error');
         $this->assertDatabaseHas('users', ['id' => $user->id]);
     }
 
@@ -83,7 +84,8 @@ class AdminAuthorizationTest extends TestCase
         $this->actingAs($reader);
         $response = $this->delete(route('admin.categories.destroy', $category));
 
-        $response->assertStatus(403);
+        $response->assertRedirect();
+        $response->assertSessionHas('error');
         $this->assertDatabaseHas('categories', ['id' => $category->id]);
     }
 }

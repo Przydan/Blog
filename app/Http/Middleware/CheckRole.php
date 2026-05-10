@@ -31,6 +31,6 @@ class CheckRole
             }
         }
 
-        abort(403, 'Unauthorized action.');
+        return redirect()->back()->with('error', 'Nie masz uprawnień do wykonania tej akcji.');
     }
 }

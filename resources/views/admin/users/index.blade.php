@@ -1,28 +1,28 @@
 <x-admin-layout>
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">User Management</h1>
+        <h1 class="text-2xl font-bold dark:text-white">User Management</h1>
         <a href="{{ route('admin.users.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
             Create User
         </a>
     </div>
 
-<div class="bg-white rounded-lg shadow overflow-hidden border border-gray-200">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+<div class="bg-white dark:bg-slate-800 rounded-lg shadow overflow-hidden border border-gray-200 dark:border-slate-700">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-slate-700">
+            <thead class="bg-gray-50 dark:bg-slate-700">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Role</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                @foreach($users as $user)
                     <tr>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">Role</th>
-                        <th class="px-6 py-3 text-right text-sm font-semibold text-gray-700 uppercase tracking-wider">Actions</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    @foreach($users as $user)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-base text-gray-900">{{ $user->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-base text-gray-600">{{ $user->email }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-base">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white dark:text-white">{{ $user->name }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ $user->email }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
                                 <span class="px-2 py-1 rounded-full text-xs font-semibold 
                                     {{ $user->role->value === 'administrator' ? 'bg-purple-100 text-purple-800' : '' }}
                                     {{ $user->role->value === 'author' ? 'bg-blue-100 text-blue-800' : '' }}

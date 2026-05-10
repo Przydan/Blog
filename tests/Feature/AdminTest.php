@@ -27,7 +27,9 @@ class AdminTest extends TestCase
         $author = User::factory()->create(['role' => Role::Author]);
         $this->actingAs($author);
 
-        $this->get('/admin/users')->assertStatus(403);
+        $response = $this->get('/admin/users');
+        $response->assertRedirect();
+        $response->assertSessionHas('error');
     }
 
     public function test_administrator_can_create_user(): void
