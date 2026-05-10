@@ -50,16 +50,16 @@ services:
       timeout: 5s
       retries: 5
 
-  # Cloudflare Tunnel Connector
-  # Before running: set your CLOUDFLARE_TUNNEL_TOKEN in your environment or .env
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    restart: unless-stopped
-    command: tunnel run
-    environment:
-      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
-    depends_on:
-      - web
+  # # Cloudflare Tunnel Connector
+  # # Before running: set your CLOUDFLARE_TUNNEL_TOKEN in your environment or .env
+  # cloudflared:
+  #   image: cloudflare/cloudflared:latest
+  #   restart: unless-stopped
+  #   command: tunnel run
+  #   environment:
+  #     - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+  #   depends_on:
+  #     - web
 
 volumes:
   db_data:
