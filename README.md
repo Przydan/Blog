@@ -107,7 +107,7 @@ Create a `.env.prod` or set variables in your shell. **Note:** You must generate
 # Your Cloudflare Tunnel Token
 CLOUDFLARE_TUNNEL_TOKEN=your_token_here
 # Your production domain
-DOMAIN=blog.twojadomena.pl
+DOMAIN=blog.przydan.org
 # Laravel encryption key (REQUIRED)
 APP_KEY=base64:wygenerowany_klucz_tutaj=
 

@@ -4,12 +4,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
+      target: app
     image: blog-przydan-app:latest
     restart: unless-stopped
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
-      - APP_URL=https://${DOMAIN:-blog.przydan.org}
+      - APP_URL=https://${DOMAIN:-laravel.przydan.org}
       - DB_CONNECTION=pgsql
       - DB_HOST=db
       - DB_PORT=5432
@@ -26,11 +27,12 @@ services:
 
   # Nginx Web Server Container
   web:
-    image: nginx:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: web
+    image: blog-przydan-web:latest
     restart: unless-stopped
-    volumes:
-      - .:/var/www/html:ro # App code (needed for static assets)
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - app
 
