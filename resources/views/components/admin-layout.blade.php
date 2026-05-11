@@ -38,7 +38,10 @@
     <div class="md:hidden p-4 flex justify-between items-center sticky top-0 z-30 shadow-md bg-slate-900 text-white dark:bg-black dark:border-b dark:border-slate-800">
         <span class="text-xl font-bold">Admin Panel</span>
         <div class="flex items-center gap-2">
-            <button class="dark-mode-toggle-btn p-2 rounded-lg hover:bg-slate-800 transition-colors text-slate-400" title="Przełącz tryb">
+            <button class="dark-mode-toggle-btn p-2 rounded-lg hover:bg-slate-800 transition-colors text-slate-400" 
+                    title="Przełącz tryb"
+                    role="switch"
+                    aria-checked="false">
                 <svg class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 18v1m9-11h1M3 12h1m15.364 6.364l-.707-.707M6.364 6.364l-.707-.707m12.728 0l-.707.707M6.364 17.636l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
@@ -64,7 +67,10 @@
                 Admin Panel
             </a>
             <div class="flex items-center gap-2">
-                <button class="dark-mode-toggle-btn p-2 rounded-lg hover:bg-slate-800 transition-colors text-slate-400" title="Przełącz tryb">
+                <button class="dark-mode-toggle-btn p-2 rounded-lg hover:bg-slate-800 transition-colors text-slate-400" 
+                    title="Przełącz tryb"
+                    role="switch"
+                    aria-checked="false">
                     <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 18v1m9-11h1M3 12h1m15.364 6.364l-.707-.707M6.364 6.364l-.707-.707m12.728 0l-.707.707M6.364 17.636l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>

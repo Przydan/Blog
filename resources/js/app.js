@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('dark_mode', isDark);
         console.log('🔄 DarkMode Toggled:', isDark);
+
+        // Update ARIA attributes for WCAG compliance
+        document.querySelectorAll('.dark-mode-toggle-btn').forEach(btn => {
+            btn.setAttribute('aria-checked', isDark.toString());
+        });
     };
 
     // Attach to all elements with the toggle class

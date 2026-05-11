@@ -13,7 +13,7 @@
                     <div class="text-5xl mb-6">{{ $service['icon'] }}</div>
                     <h3 class="text-2xl font-bold mb-4 dark:text-white">{{ $service['title'] }}</h3>
                     <div class="text-gray-600 dark:text-gray-300 mb-6 flex-grow prose dark:prose-invert">
-                        {!! Str::markdown($service->description) !!}
+                        {!! clean(Str::markdown($service->description)) !!}
                     </div>
                     <ul class="text-center space-y-2 mb-8 max-w-xs mx-auto">
                         @php

@@ -14,7 +14,7 @@
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-2 dark:text-white">{{ $project->title }}</h3>
                         <div class="text-gray-600 dark:text-gray-300 mb-4 prose dark:prose-invert">
-                            {!! Str::markdown($project->description) !!}
+                            {!! clean(Str::markdown($project->description)) !!}
                         </div>
                         <div class="flex flex-wrap gap-2 mb-6">
                             @php

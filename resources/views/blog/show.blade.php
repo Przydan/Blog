@@ -27,7 +27,7 @@
                     {{ $post->description }}
                 </p>
                 <div>
-                    {!! Str::markdown($post->content) !!}
+                    {!! clean(Str::markdown($post->content)) !!}
                 </div>
             </div>
 
